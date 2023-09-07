@@ -5,7 +5,7 @@ import PyPDF2
 from io import BytesIO
 
 app = Flask(__name__)
-CORS(app, origins=["https://main--flourishing-begonia-2e8030.netlify.app"], supports_credentials=True)
+CORS(app)
 
 
 
@@ -39,7 +39,6 @@ def generate_prompt(patient_text, choice):
         return "Invalid choice."
 
 @app.route('/get-prompt', methods=['POST'])
-@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def get_prompt():
     # Extract file and choice from POST data
     uploaded_file = request.files['file']
