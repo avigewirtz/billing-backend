@@ -5,7 +5,8 @@ import PyPDF2
 from io import BytesIO
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000"], supports_credentials=True)
+CORS(app, origins=["https://main--flourishing-begonia-2e8030.netlify.app"], supports_credentials=True)
+
 
 
 
