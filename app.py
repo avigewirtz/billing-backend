@@ -5,11 +5,11 @@ import PyPDF2
 from io import BytesIO
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000", "https://main--flourishing-begonia-2e8030.netlify.app"])
+CORS(app)
 
 
 
-
+@app.route("/")
 
 # Set up OpenAI key
 openai.api_key = "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"
