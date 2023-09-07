@@ -8,7 +8,6 @@ app = Flask(__name__)
 CORS(app)
 
 
-
 @app.route("/")
 
 # Set up OpenAI key
