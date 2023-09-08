@@ -17,7 +17,7 @@ CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 def pdf_to_text(file_content):
     """Convert PDF content to text."""
     pdf_file = BytesIO(file_content)
-    reader = PyPDF2.PdfFileReader(pdf_file)
+    reader = PyPDF2.PdfReader(pdf_file)
     text = ""
     for page_num in range(reader.numPages):
         text += reader.getPage(page_num).extractText()
