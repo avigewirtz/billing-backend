@@ -20,7 +20,7 @@ def pdf_to_text(file_content):
     reader = PyPDF2.PdfReader(pdf_file)
     text = ""
     for page_num in range(len(reader.pages)):
-        text += reader.pages[page_num].extractText()
+        text += reader.pages[page_num].extract_text()
     return text
 
 def generate_prompt(patient_text, choice):
