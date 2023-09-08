@@ -12,7 +12,7 @@ CORS(app)
 @app.route("/")
 
 # Set up OpenAI key
-openai.api_key = "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"
+# openai.api_key = "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"
 
 def pdf_to_text(file_content):
     """Convert PDF content to text."""
