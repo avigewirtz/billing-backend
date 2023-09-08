@@ -5,13 +5,15 @@ import PyPDF2
 import os
 from io import BytesIO
 
+openai.api_key = "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"
+
 app = Flask(__name__)
 
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 @app.route("/")
 
 # Set up OpenAI key
-# openai.api_key = "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"
+
 
 def pdf_to_text(file_content):
     """Convert PDF content to text."""
