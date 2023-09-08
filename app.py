@@ -10,9 +10,8 @@ openai.api_key = "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"
 app = Flask(__name__)
 
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
-@app.route("/")
+# @app.route("/")
 
-# Set up OpenAI key
 
 
 def pdf_to_text(file_content):
