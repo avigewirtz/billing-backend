@@ -22,6 +22,8 @@ def generate_prompt(patient_text, choice):
         return f"Spell check the following progress note and notify me if there are any spelling errors. Here is the progress note: {patient_text}"
     elif choice == 5:
         return f"Based on the following progress note, create a care plan based on the patient's diagnosis. Here is the patient's progress note: {patient_text}"
+    elif choice == 6:
+        return f"Based on the following progress note, does the patient have any medication discrepencies? Here is the patient's progress note: {patient_text}"
     else:
         return "Invalid choice."
 
