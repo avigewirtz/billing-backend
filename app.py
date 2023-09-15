@@ -16,13 +16,13 @@ def generate_prompt(patient_text, choice):
     if choice == 1:
         return f"Based on the following progress note and medications, please tell me what diagnosis the patient would have. Here is the progress note: {patient_text}"
     elif choice == 2:
-        return f"Please provide ICD10 codes for this visit. Here is the patient's progress note for the visit: {patient_text}"
+        return f"Based on the following progress note, please provide ICD10 and CPT codes for this visit. Here is the patient's progress note: {patient_text}"
     elif choice == 3:
-        return f"Please enter Medicare verbiage if the patient can benefit from physical therapy based on the patient's diagnoses. Here is the patient's progress note: {patient_text}"
+        return f"Based on the following progress note, please provide Medicare verbiage if the patient can benefit from physical therapy based on the patient's diagnoses. Here is the patient's progress note: {patient_text}"
     elif choice == 4:
-        return f"Spell check the following progress note and notify me if there are any errors. Here is the progress note: {patient_text}"
+        return f"Spell check the following progress note and notify me if there are any spelling errors. Here is the progress note: {patient_text}"
     elif choice == 5:
-        return f"Create a care plan based on the patient's diagnosis. Here is the patient's progress note: {patient_text}"
+        return f"Based on the following progress note, create a care plan based on the patient's diagnosis. Here is the patient's progress note: {patient_text}"
     else:
         return "Invalid choice."
 
