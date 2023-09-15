@@ -28,17 +28,28 @@ def generate_prompt(patient_text, choice):
 
 @app.route('/get-prompt', methods=['POST'])
 def get_prompt():
-    # Extract text and choice from POST data
+    # Extract notes array and choice from POST data
     data = request.json
-    patient_text = data['text']
+    notes_array = data['notes']
     selected_option = data['choice']
 
-    # Generate a prompt based on the choice
-    prompt = generate_prompt(patient_text, selected_option)
+    compiled_responses = []
 
-    # Here, we simulate the OpenAI call since I can't execute that from this platform.
+    # Loop through each note in the notes_array
+    for idx, note in enumerate(notes_array):
+        # Generate a prompt based on the choice
+        prompt = generate_prompt(note['text'], selected_option)
+
+        # Call OpenAI and get the response
+        response_content = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}]).choices[0].message.content
+
+        # Append a note marker and the response
+        compiled_responses.append(f"Note {idx + 1}:")
+        compiled_responses.append(response_content)
+
+    # Structure the response for the frontend
     response = {
-        'response': openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}]).choices[0].message.content  # You might want to replace this with your OpenAI API response.
+        'processedNotes': compiled_responses
     }
 
     return jsonify(response)
