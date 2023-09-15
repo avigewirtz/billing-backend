@@ -36,17 +36,17 @@ def get_prompt():
 
     # Loop through each note in the notes_array
     for idx, note in enumerate(notes_array):
-        # Generate a prompt based on the choice
-        prompt = generate_prompt(note['text'], selected_option)
+        # Note is now a direct string, no need for `note['text']`
+        prompt = generate_prompt(note, selected_option)
 
         try:
             # Call OpenAI and get the response
             response_content = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}]).choices[0].message.content
-            processed_notes.append(note['text'])  # append the text for note identification
+            processed_notes.append(note)  # append the text for note identification
             processed_notes.append(response_content)  # append the corresponding response_content
         except openai.error.OpenAIError as e:
             # Handle the specific error and append an error message to the corresponding note
-            processed_notes.append(note['text'])  # append the text for note identification
+            processed_notes.append(note)  # append the text for note identification
             processed_notes.append(f"Error processing this note: {str(e)}")  # append the error message
 
     # Structure the response for the frontend
@@ -55,6 +55,7 @@ def get_prompt():
     }
 
     return jsonify(response)
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
