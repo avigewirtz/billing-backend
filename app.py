@@ -42,10 +42,12 @@ def get_prompt():
         try:
             # Call OpenAI and get the response
             response_content = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}]).choices[0].message.content
-            processed_notes.append({"text": note['text'], "response": response_content})
+            processed_notes.append(note['text'])  # append the text for note identification
+            processed_notes.append(response_content)  # append the corresponding response_content
         except openai.error.OpenAIError as e:
             # Handle the specific error and append an error message to the corresponding note
-            processed_notes.append({"text": note['text'], "response": f"Error processing this note: {str(e)}"})
+            processed_notes.append(note['text'])  # append the text for note identification
+            processed_notes.append(f"Error processing this note: {str(e)}")  # append the error message
 
     # Structure the response for the frontend
     response = {
