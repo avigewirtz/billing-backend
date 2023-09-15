@@ -5,7 +5,6 @@ import os
 
 openai.api_key = "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"
 
-# openai.api_key = "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"
 app = Flask(__name__)
 
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
@@ -33,23 +32,24 @@ def get_prompt():
     notes_array = data['notes']
     selected_option = data['choice']
 
-    compiled_responses = []
+    processed_notes = []
 
     # Loop through each note in the notes_array
     for idx, note in enumerate(notes_array):
         # Generate a prompt based on the choice
         prompt = generate_prompt(note['text'], selected_option)
 
-        # Call OpenAI and get the response
-        response_content = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}]).choices[0].message.content
-
-        # Append a note marker and the response
-        compiled_responses.append(f"Note {idx + 1}:")
-        compiled_responses.append(response_content)
+        try:
+            # Call OpenAI and get the response
+            response_content = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}]).choices[0].message.content
+            processed_notes.append({"text": note['text'], "response": response_content})
+        except openai.error.OpenAIError as e:
+            # Handle the specific error and append an error message to the corresponding note
+            processed_notes.append({"text": note['text'], "response": f"Error processing this note: {str(e)}"})
 
     # Structure the response for the frontend
     response = {
-        'processedNotes': compiled_responses
+        'processedNotes': processed_notes
     }
 
     return jsonify(response)
