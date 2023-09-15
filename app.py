@@ -3,9 +3,9 @@ from flask_cors import CORS
 import openai
 import os
 
-# openai.api_key = "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"
+openai.api_key = "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"
 
-openai.api_key = "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"
+# openai.api_key = "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"
 app = Flask(__name__)
 
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
